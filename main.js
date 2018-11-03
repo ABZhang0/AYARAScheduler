@@ -35,10 +35,10 @@ function addCourse() {
         return
     }
 
-    let campus = $("#inputCampus").val()
+    //let campus = $("#inputCampus").val()
     let courseName = $("#inputCourse").val().toUpperCase()
-    let term = $("#inputTerm").val()
-    let regex = /([A-Z]{3,4})\s?(\w+)/
+    //let term = $("#inputTerm").val()
+    let regex = /([A-Z]{2,4})\s?(\w+)/
     let match = regex.exec(courseName)
 
     // TODO: Need error handling here
@@ -54,18 +54,18 @@ function addCourse() {
         return
     }
 
-    let year = yearSession.slice(0, -1) // 2017
+    //let year = yearSession.slice(0, -1) // 2017
     let session = yearSession.substr(-1); // W
     $("#buttonAdd").attr("disabled", true);
     $("#buttonAdd").text("Adding...")
     lockSectionAndTerm(true)
-    parseSections(campus, year, session, subject, course, term, function (sections) {
+    parseSections(session, subject, course, completion, function (sections) {
         if (!sections) {
             if (courses.length == 0) {
                 lockSectionAndTerm(false)
             }
             alert("Course not found.")
-            console.log("Course not found: " + urlForCourse(campus, year, session, subject, course))
+            console.log("Course not found: " + urlForCourse(subject, course))
             // TODO: Throw a nicer error here
         } else {
             addCourseToTable(courseName, sections)
@@ -78,7 +78,7 @@ function addCourse() {
 function lockSectionAndTerm(locked) {
     $("#inputCampus").attr("disabled", locked);
     $("#inputSession").attr("disabled", locked);
-    $("#inputTerm").attr("disabled", locked);
+    //$("#inputTerm").attr("disabled", locked);
     if (locked) {
         $("#timetableLabel").text(`${$("#inputSession").val() + $("#inputTerm").val()} Timetable`)
     } else {
