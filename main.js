@@ -1,7 +1,7 @@
 window.onload = setup
 /** @type {number} */
 var currBlock = 1
-let versionString = "0.3.9"
+let versionString = "0.1.0"
 
 function setup() {
     $('#coursesTable > tbody').on('click', '.delete', removeCourse)
@@ -9,7 +9,7 @@ function setup() {
     $('#schedule-pagination').twbsPagination($.extend({}, defaultOptions, {
         totalPages: 1
     }))
-    $('#ver-text').text("Ver " + versionString + " by Yichen")
+    $('#ver-text').text("Version " + versionString + " by AYARA")
 
     loadSessions()
     schedule()
@@ -27,7 +27,7 @@ function loadSessions() {
 }
 
 function addCourse() {
-    let yearSession = $("#inputSession").val() // 2017W
+    let yearSession = $("#inputSession").val() // 2019 Spring
 
     // TODO: Need better error handling here
     if (yearSession == null) {

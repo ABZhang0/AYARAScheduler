@@ -59,7 +59,7 @@ function urlForCourse(campus, year, session, subject, course) {
 }
 
 /**
- * @callback sesctionsCallback
+ * @callback sectionsCallback
  * @param {Section[]} sections
  */
 
@@ -71,7 +71,7 @@ function urlForCourse(campus, year, session, subject, course) {
  * @param {string} subject 
  * @param {string} course 
  * @param {string} term 
- * @param {sesctionsCallback} completion 
+ * @param {sectionsCallback} completion 
  */
 function parseSections(campus, year, session, subject, course, term, completion) {
     function parse(data) {
