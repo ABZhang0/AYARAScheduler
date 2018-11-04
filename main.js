@@ -59,7 +59,7 @@ function addCourse() {
     $("#buttonAdd").attr("disabled", true);
     $("#buttonAdd").text("Adding...")
     lockSectionAndTerm(true)
-    parseSections(session, subject, course, completion, function (sections) {
+    parseSections(session, subject, course, function (sections) {
         if (!sections) {
             if (courses.length == 0) {
                 lockSectionAndTerm(false)
@@ -80,7 +80,7 @@ function lockSectionAndTerm(locked) {
     $("#inputSession").attr("disabled", locked);
     //$("#inputTerm").attr("disabled", locked);
     if (locked) {
-        $("#timetableLabel").text(`${$("#inputSession").val() + $("#inputTerm").val()} Timetable`)
+        $("#timetableLabel").text(`${$("#inputSession").val() /*+ $("#inputTerm").val()*/} Timetable`)
     } else {
         $("#timetableLabel").text("Timetable")
     }

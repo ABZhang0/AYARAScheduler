@@ -6,7 +6,7 @@
  * @property {string} sectionID         // class number
  * @property {string} activity          // type of class (lecture/lab/etc.)
  * @property {Time} times               // class times
- * @property {string} length            // class length
+ * @property {string} duration          // class length
  * @property {Object.<string, Section[]>} subactivities
  */
 
@@ -79,12 +79,15 @@ function parseSections(session, subject, course, completion) {
         try {
             var doc = $($.parseHTML(data))
             var blocks = doc.find('.classTable')
-
             for (let block of blocks) {
-                var cSections = block.children[0].children.remove[0].remove[1]
-                //console.log(cSections)
-                for(let cSection of cSections) {
-                    parseRow(cSection, sections)
+                console.log(blocks)
+                var cSections = block.children[0].children
+                // for(let cSection of cSections) {
+                //     parseRow(cSection, sections)
+                // }
+                for (var i = 2; i < cSections.length; i++) {
+                    console.log(cSections[i])
+                    parseRow(cSections[i], sections)
                 }
             }
         } catch (err) {
@@ -94,19 +97,29 @@ function parseSections(session, subject, course, completion) {
     }
 
     /**
-     * @param {*} row 
+     * @param {*} cSection
      * @param {Section[]} sections 
      */
-    function parseRow(row, sections) {
-        let items = row.children
-        let sectionName = $(items[0]).text()
-        let length = $(items[1]).text()
-        let activity = $(items[2]).text()
-        let status = $(items[3]).text()
+    function parseRow(cSection, sections) {
+        let items = cSection.children
+        let sectionName = subject + " " + course + "-" + $(items[0]).text().trim()
+        console.log(sectionName)
+        let duration = $(items[1]).text().trim()
+        console.log(duration)
+        let activity = $(items[2]).text().trim()
+        console.log(activity)
+        let status = $(items[3]).text().trim() //adjustment to whitespace formatting
+        status = status.substr(0, status.indexOf(" "))
+        console.log(status)
         // let interval = $(items[4]).text()
         let days = parseWeekdays($(items[4]).text())
-        let beginTime = preprocessTime($(items[6]).text().slice(0, 5))
-        let endTime = preprocessTime($(items[6]).text().slice(9, 14))
+        console.log(days)
+        let beginTime = preprocessTime($(items[5]).text().trim().slice(0, 6))
+        console.log(beginTime.toString())
+        let endTime = preprocessTime($(items[5]).text().trim().slice(9, 15))
+        console.log(endTime.toString())
+        let instructor = $(items[7]).text().trim()
+        console.log(instructor)
         // let comments = $(items[8]).text()
         // if (courseTerm !== term && courseTerm !== "1-2") {
         //     sections.push({ status: status, sectionName: sectionName, activity: activity, times: [] })
@@ -127,6 +140,8 @@ function parseSections(session, subject, course, completion) {
                 endTime: endTime
             }]
         })
+
+        console.log(sections)
     }
 
     /**
@@ -184,6 +199,7 @@ function parseSections(session, subject, course, completion) {
         }
 
         return newSections
+        //return sections
     }
 
     /**
@@ -197,11 +213,15 @@ function parseSections(session, subject, course, completion) {
         } else {
             var timeTF;
             if (time.split().pop() === "a") {
-                timeTF = LocalTime.parse(time)
+                timeTF = LocalTime.parse(time.substring(0, time.length - 1))
+                //console.log(timeTF.toString())
                 return timeTF;
             } else {
-                timeTF = LocalTime.parse(time)
-                timeTF.plusHours(12)
+                timeTF = LocalTime.parse(time.substring(0, time.length - 1))
+                if (time.substring(0, 2) !== "12") {    // 12pm edge case
+                    timeTF = timeTF.plusHours(12)
+                }
+                //console.log(timeTF.toString())
                 return timeTF;
             }
         }
