@@ -3,7 +3,7 @@
  * @typedef {Object} Section
  * @property {string} status            // available or full
  * @property {string} sectionName       // course name
- * @property {string} sectionID         // class number
+ * @property {string} classID         // class number
  * @property {string} activity          // type of class (lecture/lab/etc.)
  * @property {Time} times               // class times
  * @property {string} duration          // class length
@@ -102,6 +102,11 @@ function parseSections(session, subject, course, completion) {
      */
     function parseRow(cSection, sections) {
         let items = cSection.children
+        //
+        // let pattern = /classNumber_(\d+)/g;
+        // let match = pattern.exec($(items[0]))
+        // let classID = match[1]
+        //
         let sectionName = subject + " " + course + "-" + $(items[0]).text().trim()
         console.log(sectionName)
         let duration = $(items[1]).text().trim()
@@ -212,7 +217,7 @@ function parseSections(session, subject, course, completion) {
             return ""
         } else {
             var timeTF;
-            if (time.split().pop() === "a") {
+            if (time.substring(time.length-1, time.length) === "a") {
                 timeTF = LocalTime.parse(time.substring(0, time.length - 1))
                 //console.log(timeTF.toString())
                 return timeTF;

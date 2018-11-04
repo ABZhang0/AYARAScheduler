@@ -1,5 +1,6 @@
-# UBCScheduler
-UBC Course Scheduler
+# AYARAScheduler
+
+Based off of an implementation of Schemetrical's UBC Course Scheduler, adapted to Vanderbilt University's YES website with additional features.
 
 Things you can do:
 
@@ -13,7 +14,3 @@ Things it can't do (yet)
 -	generate term 1 & 2 at the same time
 -	auto enroll in selected timetable
 -	inform you why timetables cannot be made (whether it's scheduling conflict, no sections available, etc)
-
-I think it's super cool. I hope you do too!
-
-Please help me make this better by contributing! I'm not a web dev by any means so I apologise for the spaghetti.

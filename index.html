@@ -11,7 +11,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -20,15 +20,15 @@
         
         ga('create', 'UA-119260652-1', 'auto');
         ga('send', 'pageview');
-    </script>
+    </script> -->
 
-    <title>UBC Course Scheduler</title>
-    <meta name="description" content="Automatic timetable generator for planning courses in UBC Vancouver and Okanagan.">
-    <meta name="keywords" content="scheduling,university of british columbia,ssc,section,worklist,planner">
+    <title>VandyHacks V Course Scheduler</title>
+    <meta name="description" content="Automatic timetable generator for planning courses in Vanderbilt.">
+    <meta name="keywords" content="scheduling,vanderbilt university,yes,section,worklist,planner">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">VandyHacks V Course Scheduler</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -37,17 +37,17 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <!-- <a class="nav-link" href="#">Home
                         <span class="sr-only">(current)</span>
-                    </a>
+                    </a> -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/ABZhang0/AYARAScheduler" target="_blank">Github</a>
+                    <a class="nav-link" href="https://yes.vanderbilt.edu/schedule" target="_blank">YES Search</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto justify-content-end">
                 <span class="navbar-text" id="ver-text">
-                    Ver 0.3.7 by Yichen
+                    
                 </span>
             </ul>
         </div>
@@ -91,7 +91,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" for="inputCourse">Course</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="CPSC 110" id="inputCourse" onkeyup="return checkSubmitCourse(event)"
+                    <input type="text" class="form-control" placeholder="CS 2201" id="inputCourse" onkeyup="return checkSubmitCourse(event)"
                         required>
                 </div>
                 <button type='button' class="btn btn-primary" onclick="addCourse()" id="buttonAdd">Add Course</button>

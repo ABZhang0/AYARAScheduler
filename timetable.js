@@ -60,16 +60,20 @@ function loadTimetable(schedule) {
     // Generate times
     let endTime = LocalTime.parse('21:00')
     let times = []
-    for (let i = LocalTime.parse('08:00'); !i.isAfter(endTime); i = i.plusMinutes(30)) {
+    for (let i = LocalTime.parse('08:00'); !i.isAfter(endTime); i = i.plusMinutes(5)) {
         times.push(i)
     }
 
     // Generate row headers
     let formatter = JSJoda.DateTimeFormatter.ofPattern('kk:mm')
+    let count = 0
     for (time of times) {
         let row = $("<tr></tr>")
-        row.append($(`<th scope=\"row\">${time.format(formatter)}</th>`))
+        if (count % 6 == 0) {
+            row.append($(`<th rowspan=6 scope=\"row\">${time.format(formatter)}</th>`))
+        }
         timetable.append(row)
+        count++
     }
 
     // Generate each column
@@ -89,7 +93,7 @@ function loadTimetable(schedule) {
             let filteredCourse = filteredSchedule[0]
             if (time.equals(filteredCourse.beginTime)) {
                 let duration = filteredCourse.beginTime.until(filteredCourse.endTime, JSJoda.ChronoUnit.MINUTES)
-                cell = $(`<td rowspan="${duration / 30}" id="courseBlock">${filteredCourse.sectionName}<br>${filteredCourse.status}</td>`)
+                cell = $(`<td rowspan="${duration / 5}" id="courseBlock">${filteredCourse.sectionName}<br>${filteredCourse.status}</td>`)
                 if (lockedSections.includes(filteredCourse.sectionName)) cell.addClass("course-locked")
                 row.append(cell)
             }

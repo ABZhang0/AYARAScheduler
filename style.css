@@ -9,6 +9,12 @@
     font-size: 0.8em;
 }
 
+#timetable > tbody > tr { 
+    /* line-height: 5px; */
+    max-height: 1px;
+    height: 1px;
+}
+
 #courseBlock {
     cursor: pointer;
     color: #495057;
@@ -17,7 +23,7 @@
 
 #courseBlock.course-locked {
     color: white;
-    background-color: #28a745;
+    background-color: #88ff89;
 }
 
 .pagination > .active {

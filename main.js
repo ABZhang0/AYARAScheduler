@@ -1,11 +1,12 @@
 window.onload = setup
 /** @type {number} */
 var currBlock = 1
-let versionString = "0.1.0"
+let versionString = "0.1.2"
 
 function setup() {
     $('#coursesTable > tbody').on('click', '.delete', removeCourse)
     $('#timetable').on('click', '#courseBlock', lockSection)
+    //$('#timetable').on('click', '#courseBlock', sectionMoreInfo)
     $('#schedule-pagination').twbsPagination($.extend({}, defaultOptions, {
         totalPages: 1
     }))
@@ -126,7 +127,7 @@ function noDeathPls() {
         alert("You have already chosen to sleep in.")
         return
     }
-    ga('send', 'event', 'Courselist', 'no8am');
+    // ga('send', 'event', 'Courselist', 'no8am');
     addCourseToTable(courseName, [{
         status: "", sectionName: courseName, activity: "", subactivities: {}, times: [{
             days: Weekday.Monday | Weekday.Tuesday | Weekday.Wednesday | Weekday.Thursday | Weekday.Friday,
@@ -141,9 +142,9 @@ function schedule() {
     $("#schedule").text("Scheduling...")
     lockedSections = []
     currPage = 1
-    if (courses.length > 0) {
-        ga('send', 'event', 'Timetable', 'schedule', versionString);
-    }
+    // if (courses.length > 0) {
+    //     ga('send', 'event', 'Timetable', 'schedule', versionString);
+    // }
 
     var fn = scheduleTimetable.bind(this, courses.slice(0), function (newSchedules) {// schedule using a shallow copy
         schedules = newSchedules
@@ -153,6 +154,13 @@ function schedule() {
         $("#schedule").text("Schedule")
     })
     window.requestAnimationFrame(fn)
+}
+
+function sectionMoreInfo() {
+    function popUp(data) {
+        //
+    }
+    $.ajax({ url: 'https://cors-anywhere.herokuapp.com/https://acad.app.vanderbilt.edu/more/GetClassSectionDetail.action?classNumber=9357&termCode=0920&hideAddToCartButton=false', success: popUp })
 }
 
 function lockSection() {
