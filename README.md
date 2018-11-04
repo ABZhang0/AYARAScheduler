@@ -5,12 +5,13 @@ Based off of an implementation of Schemetrical's UBC Course Scheduler, adapted t
 Things you can do:
 
 -	add courses and auto generate schedules
--	restrict courses based on time (eg. no 8am)
--	lock sections that you want
+- add laboratories associated with the lecture courses to the timetable
+-	restrict courses based on time blocks to reduce possibilities
+-	lock sections in position to reduce possibilities
 
-Things it can't do (yet)
+Things it can't do (yet):
 
--	Filter by status (Restricted, Full)
--	generate term 1 & 2 at the same time
--	auto enroll in selected timetable
--	inform you why timetables cannot be made (whether it's scheduling conflict, no sections available, etc)
+-	Filter by status (if sections are full)
+-	mouseover popup with more detailed course info (instructor, length, activities)
+-	auto enroll (bypassing YES) in selected timetable
+-	generate feedback for impossible schedules (no sections or times available, etc.)
